@@ -1,7 +1,8 @@
-#include<opencv2/opencv.hpp>
+//#include<opencv2/opencv.hpp>
 #include<iostream>
 #include <fstream>
 //using namespace cv;
+using namespace std;
  
 
 void read(char* fileName) {
