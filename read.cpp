@@ -22,8 +22,9 @@ void read (char* Path){
     }
 
     char fileheader[FileHeaderSize];
+    char informationheader[InformationHeaderSize];
     image.read(fileheader,FileHeaderSize);
-
+    image.read(informationheader,InformationHeaderSize);
     if (fileheader[0] == 'B' && fileheader[1] == 'M'){
         cout << "File is a BMP"<< endl;
     }
@@ -33,6 +34,9 @@ void read (char* Path){
 
     int FileSize = ((int)fileheader[2]) + (((int)fileheader[3]) << 8) + (((int)fileheader[4]) << 16) + (((int)fileheader[5]) << 24);
     int DataOffset = ((int)fileheader[10]) + (((int)fileheader[11]) << 8) + (((int)fileheader[12]) << 16) + (((int)fileheader[13]) << 24);
+    int Width = ((int)informationheader[4]) + (((int)informationheader[5]) << 8) + (((int)informationheader[6]) << 16) + (((int)informationheader[7]) << 24);
+    int Height = ((int)informationheader[8]) + (((int)informationheader[9]) << 8) + (((int)informationheader[10]) << 16) + (((int)informationheader[11]) << 24);
+    int BitWidth = ((int)informationheader[14]) + ((int)informationheader[15] << 8);
 
     // int i;
     // cout << "File Header:"<<endl;
@@ -43,7 +47,7 @@ void read (char* Path){
 
     cout << "File Size = "<<FileSize/1024<<" KB"<<endl;
     cout << "Data Offset = " <<DataOffset<<" bytes"<<endl;
-    cout << "Height = " <<Height<<" bytes"<<endl;
-    cout << "Width = " <<Width<<" bytes"<<endl;
-    cout << "BitWidth = " <<BitWidth<<" bytes"<<endl;
+    cout << "Height = " <<Height<<" pixels"<<endl;
+    cout << "Width = " <<Width<<" pixels"<<endl;
+    cout << "BitWidth = " <<BitWidth<<" bits = "<<BitWidth/8<<" bytes"<< endl;
 }
