@@ -50,4 +50,25 @@ void read (char* Path){
     cout << "Height = " <<Height<<" pixels"<<endl;
     cout << "Width = " <<Width<<" pixels"<<endl;
     cout << "BitWidth = " <<BitWidth<<" bits = "<<BitWidth/8<<" bytes"<< endl;
+
+    char PixelData[Height*Width*BitWidth/8];
+    image.read(PixelData,Height*Width*BitWidth/8);
+
+    char ImageData[Height][Width*BitWidth/8];
+    int i,j;
+    for (i=0;i<Height;i++){
+	    for (j=0;j<Width*BitWidth/8;j++){
+	   	ImageData[i][j] = PixelData[((Width*BitWidth/8)*i)+j];
+		if(j == 0)
+			cout << "[";
+		else if(j%3 == 0)
+			cout << "] [";
+		else
+			cout << ",";
+
+		cout << (int)ImageData[i][j];
+	    }
+	    cout << "]" << endl;
+    }
+
 }
