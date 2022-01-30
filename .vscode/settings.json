@@ -1,7 +1,7 @@
 {
-  "C_Cpp_Runner.cCompilerPath": "C:/MinGW/bin/gcc.exe",
-  "C_Cpp_Runner.cppCompilerPath": "C:/MinGW/bin/g++.exe",
-  "C_Cpp_Runner.debuggerPath": "C:/MinGW/bin/gdb.exe",
+  "C_Cpp_Runner.cCompilerPath": "C:/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe",
+  "C_Cpp_Runner.cppCompilerPath": "C:/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe",
+  "C_Cpp_Runner.debuggerPath": "C:/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gdb.exe",
   "C_Cpp_Runner.cStandard": "c11",
   "C_Cpp_Runner.cppStandard": "c++17",
   "C_Cpp_Runner.msvcBatchPath": "",
@@ -15,7 +15,7 @@
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.includePaths": [
-    "C:\\opencv\\OpenCV-MinGW-Build-OpenCV-4.5.2-x64\\include"
+    "C:/opencv/OpenCV-MinGW-Build-OpenCV-4.5.2-x64/include"
   ],
   "C_Cpp_Runner.includeSearch": [
     "*",
@@ -28,5 +28,10 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+    "iosfwd": "cpp",
+    "iostream": "cpp",
+    "fstream": "cpp"
+  }
 }

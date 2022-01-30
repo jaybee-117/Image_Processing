@@ -4,7 +4,7 @@
         {
             "type": "shell",
             "label": "g++.exe build active file",
-            "command": "C:/MinGW/bin/g++.exe",
+            "command": "C:\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe",
             "args": [
                 "-g",
                 "${file}",
@@ -28,7 +28,7 @@
                 "-llibopencv_videoio411"
             ],
             "options": {
-                "cwd": "C:/MinGW/bin"
+                "cwd": "C:\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin"
             },
             "problemMatcher": [
                 "$gcc"

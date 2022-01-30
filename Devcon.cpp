@@ -13,15 +13,6 @@ void read(char* fileName) {
     cout << sizeof(n) << endl;
     unsigned int file_size = 0, reserved = 0, data_offset = 0;
     unsigned int size_of_header = 0, width = 0, height = 0, planes, bit_width = 0;
-    // while (ft)
-    // {
-    //     // ft >> c1>>c2;
-    //     // ft >> file_size;
-    //     // ft >> reserved;
-    //     ft>>c;
-    //     cout << c;
-
-    // }
 
     // Check BM
     ft >> c1;
@@ -37,10 +28,10 @@ void read(char* fileName) {
     for (int i = 0; i < 4; i++)
     {
         ft >> c;
-        file_size += (int)c;
-        file_size <<= 8;
+        file_size += (((int)c)<<(i*8));
+        // file_size <<= 8;
     }
-    cout << "File Size = " << file_size/256 << endl;
+    cout << "File Size (in KB) = " << file_size/1024 << endl;
     //skip(ft, 4);
     n = 4;
     while (n--)
@@ -51,10 +42,10 @@ void read(char* fileName) {
     for (int i = 0; i < 4; i++)
     {
         ft >> c;
-        data_offset += (int)c;
-        data_offset <<= 8;
+        data_offset += (((int)c)<<(i*8));
+        // data_offset <<= 8;
     }
-    cout << "Data offset = " << data_offset/256 << endl;
+    cout << "Data offset = " << data_offset << endl;
     // Skip header size
    // skip(ft, 4);
     n = 4;
@@ -66,18 +57,18 @@ void read(char* fileName) {
     for (int i = 0; i < 4; i++)
     {
         ft >> c;
-        width += (int)c;
-        width <<= 8;
+        width += (((int)c)<<(i*8));
+        // width <<= 8;
     }
-    cout << "Width = " << width/256 << endl;
+    cout << "Width = " << width << endl;
     // ft >> height;
     for (int i = 0; i < 4; i++)
     {
         ft >> c;
-        height += (int)c;
-        height <<= 8;
+        height += (((int)c)<<(i*8));
+        // height <<= 8;
     }
-    cout << "Height = " << height/256 << endl;
+    cout << "Height = " << height << endl;
     //skip(ft, 2);
     n = 2;
     while (n--)
@@ -88,17 +79,17 @@ void read(char* fileName) {
     for (int i = 0; i < 4; i++)
     {
         ft >> c;
-        bit_width += (int)c;
-        bit_width <<= 8;
+        bit_width += (((int)c)<<(i*8));
+        // bit_width <<= 8;
     }
-    cout << "Bit Width = " << bit_width/256 << endl;
+    cout << "Bit Width = " << bit_width << endl;
     //skip(ft, 24);
     n = 24;
     while (n--)
     {
         ft >> c;
     }
-    int8_t r, g, b;
+    uint8_t r, g, b;
 
 
     ofstream fot;
@@ -107,8 +98,24 @@ void read(char* fileName) {
     {
         for (int k = 0; k < width; k++)
         {
-            ft >> b >> g >> r;
-            fot << "[" << r << "," << g << "," << b << "] ";
+            r=0,g=0,b=0;
+            // ft >> b >> g >> r;
+            for (int i = 0; i < 1; i++)
+            {
+                ft >> c;
+                b += (((int)c)<<(i*8));
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                ft >> c;
+                g += (((int)c)<<(i*8));
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                ft >> c;
+                r += (((int)c)<<(i*8));
+            }
+            fot << "[" << to_string(r) << "," << to_string(g) << "," << to_string(b) << "] "<<endl;
         }
         fot << endl;
     }
@@ -119,7 +126,5 @@ void read(char* fileName) {
 int main() {
     char name[] = "lena_colored_256.bmp";
     read(name);
-    char c='c';
-    cout << (int)c << endl;
     return 0;
 }
