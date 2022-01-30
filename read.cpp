@@ -6,7 +6,7 @@
 
 using namespace std;
 
-uint8_t* read (char* Path, int FileSize,int DataOffset, int Width, int Height, int BitWidth);
+uint8_t* read (char* Path, int &FileSize,int &DataOffset, int &Width, int &Height, int &BitWidth);
 void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
 
 int main(){
@@ -14,15 +14,16 @@ int main(){
     uint8_t* pixeldata;
     int FileSize, DataOffset,Width,Height,BitWidth;
     pixeldata = read(path,FileSize, DataOffset,Width,Height,BitWidth);
+    RGBtoGray(path, pixeldata, Width, Height, BitWidth);
     return 0;
 }
 
-uint8_t* read (char* Path, int FileSize,int DataOffset, int Width, int Height, int BitWidth){
+uint8_t* read (char* Path, int &FileSize,int &DataOffset, int &Width, int &Height, int &BitWidth){
     FILE* image;
     image=fopen(Path,"r");                            
-    // if (image.is_open() == 0){                  
-    //     cout << "Cannot open image" << endl;
-    // }
+    if (image == NULL){                  
+        cout << "Cannot open image" << endl;
+    }
 
     char fileheader[FileHeaderSize];
     char informationheader[InformationHeaderSize];
@@ -47,9 +48,9 @@ uint8_t* read (char* Path, int FileSize,int DataOffset, int Width, int Height, i
     cout << "Width = " <<Width<<" pixels"<<endl;
     cout << "BitWidth = " <<BitWidth<<" bits = "<<BitWidth/8<<" bytes"<< endl;
     int totalSize  = Height*Width*BitWidth/8;
-    cout<<totalSize;
-    uint8_t PixelData[Height*Width*BitWidth/8];
 
+    uint8_t *PixelData;
+    PixelData = (uint8_t*) malloc(totalSize); 
     fread(PixelData,1,totalSize,image);
     
     uint8_t ImageData[Height][Width*BitWidth/8];
@@ -70,7 +71,6 @@ uint8_t* read (char* Path, int FileSize,int DataOffset, int Width, int Height, i
 	    }
 	    fot << "]" << endl;
     }
-    RGBtoGray(Path,PixelData,Width,Height,BitWidth);                   //ldskp;lqkdp;k 
     return PixelData;
 }
 
@@ -78,6 +78,7 @@ void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
 
     int i,j;
     uint8_t grayscale[Height*Width*BitWidth/8];
+    memset(grayscale, 255, Height*Width*BitWidth/8);
     for (i=0;i<Height*Width*BitWidth/8;i+=3){
         
         grayscale[i] = ((0.114*Image[i] + 0.587*Image[i+1] + 0.299*Image[i+2]));
@@ -108,6 +109,5 @@ void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
 
     for (i=0;i<Height*Width*BitWidth/8;i++){
 	   	grayscale_image << grayscale[i];
-        //cout<<(uint8_t)grayscale[i]<<" "; 
     }
 }
