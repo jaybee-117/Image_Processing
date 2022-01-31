@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /mnt/d/Career/Image_Processing/Histogram
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/Histogram.dir/all
+all: CMakeFiles/Histogram_Equalisation_Matching.dir/all
 
 .PHONY : all
 
@@ -63,36 +63,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/Histogram.dir/clean
+clean: CMakeFiles/Histogram_Equalisation_Matching.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Histogram.dir
+# Target rules for target CMakeFiles/Histogram_Equalisation_Matching.dir
 
 # All Build rule for target.
-CMakeFiles/Histogram.dir/all:
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/depend
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/Career/Image_Processing/Histogram/CMakeFiles --progress-num=1,2 "Built target Histogram"
-.PHONY : CMakeFiles/Histogram.dir/all
+CMakeFiles/Histogram_Equalisation_Matching.dir/all:
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/depend
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/Career/Image_Processing/Histogram/CMakeFiles --progress-num=1,2 "Built target Histogram_Equalisation_Matching"
+.PHONY : CMakeFiles/Histogram_Equalisation_Matching.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Histogram.dir/rule: cmake_check_build_system
+CMakeFiles/Histogram_Equalisation_Matching.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Career/Image_Processing/Histogram/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Histogram.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Histogram_Equalisation_Matching.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Career/Image_Processing/Histogram/CMakeFiles 0
-.PHONY : CMakeFiles/Histogram.dir/rule
+.PHONY : CMakeFiles/Histogram_Equalisation_Matching.dir/rule
 
 # Convenience name for target.
-Histogram: CMakeFiles/Histogram.dir/rule
+Histogram_Equalisation_Matching: CMakeFiles/Histogram_Equalisation_Matching.dir/rule
 
-.PHONY : Histogram
+.PHONY : Histogram_Equalisation_Matching
 
 # clean rule for target.
-CMakeFiles/Histogram.dir/clean:
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/clean
-.PHONY : CMakeFiles/Histogram.dir/clean
+CMakeFiles/Histogram_Equalisation_Matching.dir/clean:
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/clean
+.PHONY : CMakeFiles/Histogram_Equalisation_Matching.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

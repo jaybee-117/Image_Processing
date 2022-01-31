@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /mnt/d/Career/Image_Processing/Histogram
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Histogram
+# Target rules for targets named Histogram_Equalisation_Matching
 
 # Build rule for target.
-Histogram: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Histogram
-.PHONY : Histogram
+Histogram_Equalisation_Matching: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Histogram_Equalisation_Matching
+.PHONY : Histogram_Equalisation_Matching
 
 # fast build rule for target.
-Histogram/fast:
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/build
-.PHONY : Histogram/fast
+Histogram_Equalisation_Matching/fast:
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/build
+.PHONY : Histogram_Equalisation_Matching/fast
 
-Histogram_Equalisation.o: Histogram_Equalisation.cpp.o
+Histogram_Equalisation_Matching.o: Histogram_Equalisation_Matching.cpp.o
 
-.PHONY : Histogram_Equalisation.o
+.PHONY : Histogram_Equalisation_Matching.o
 
 # target to build an object file
-Histogram_Equalisation.cpp.o:
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/Histogram_Equalisation.cpp.o
-.PHONY : Histogram_Equalisation.cpp.o
+Histogram_Equalisation_Matching.cpp.o:
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/Histogram_Equalisation_Matching.cpp.o
+.PHONY : Histogram_Equalisation_Matching.cpp.o
 
-Histogram_Equalisation.i: Histogram_Equalisation.cpp.i
+Histogram_Equalisation_Matching.i: Histogram_Equalisation_Matching.cpp.i
 
-.PHONY : Histogram_Equalisation.i
+.PHONY : Histogram_Equalisation_Matching.i
 
 # target to preprocess a source file
-Histogram_Equalisation.cpp.i:
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/Histogram_Equalisation.cpp.i
-.PHONY : Histogram_Equalisation.cpp.i
+Histogram_Equalisation_Matching.cpp.i:
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/Histogram_Equalisation_Matching.cpp.i
+.PHONY : Histogram_Equalisation_Matching.cpp.i
 
-Histogram_Equalisation.s: Histogram_Equalisation.cpp.s
+Histogram_Equalisation_Matching.s: Histogram_Equalisation_Matching.cpp.s
 
-.PHONY : Histogram_Equalisation.s
+.PHONY : Histogram_Equalisation_Matching.s
 
 # target to generate assembly for a file
-Histogram_Equalisation.cpp.s:
-	$(MAKE) -f CMakeFiles/Histogram.dir/build.make CMakeFiles/Histogram.dir/Histogram_Equalisation.cpp.s
-.PHONY : Histogram_Equalisation.cpp.s
+Histogram_Equalisation_Matching.cpp.s:
+	$(MAKE) -f CMakeFiles/Histogram_Equalisation_Matching.dir/build.make CMakeFiles/Histogram_Equalisation_Matching.dir/Histogram_Equalisation_Matching.cpp.s
+.PHONY : Histogram_Equalisation_Matching.cpp.s
 
 # Help Target
 help:
@@ -156,12 +156,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Histogram"
-	@echo "... Histogram_Equalisation.o"
-	@echo "... Histogram_Equalisation.i"
-	@echo "... Histogram_Equalisation.s"
+	@echo "... rebuild_cache"
+	@echo "... Histogram_Equalisation_Matching"
+	@echo "... Histogram_Equalisation_Matching.o"
+	@echo "... Histogram_Equalisation_Matching.i"
+	@echo "... Histogram_Equalisation_Matching.s"
 .PHONY : help
 
 
