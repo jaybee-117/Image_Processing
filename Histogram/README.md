@@ -3,7 +3,7 @@ The program `Histogram_Equalisation_Matching.cpp` will equalise/match images dep
 
 ## Making the file using CMake (For Linux/Ubuntu/WSL)
 Download the repository and clone it onto the device into a preferred directory using:<br>
-`$ git clone https://github.com/jaybee-117/Image_Processsing/Histogram`
+`$ git clone https://github.com/jaybee-117/Image_Processing/Histogram`
 
 Assuming the OpenCV library has been made using CMake in ~/opencv:
 Navigate into the `/Histogram` directory and make the code using:<br>
@@ -22,7 +22,7 @@ Run the executeable using:
 
 For easy usage, here's the code:
 ```
-git clone https://github.com/jaybee-117/Image_Processsing/Histogram`
+git clone https://github.com/jaybee-117/Image_Processing/Histogram
 cd Histogram
 cmake .
 make
