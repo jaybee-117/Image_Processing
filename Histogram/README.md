@@ -10,6 +10,7 @@ Navigate into the `/Histogram` directory and make the code using:<br>
 `
 $ cmake .
 `
+<br>
 `
 $ make
 `
