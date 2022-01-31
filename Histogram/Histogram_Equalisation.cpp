@@ -94,8 +94,6 @@ void histDisplay_c(int histogram[], const char* name)
         line(histImage, Point(bin_w * (i), hist_h), Point(bin_w * (i), hist_h - hist[i]), Scalar(0, 0, 0), 1, 8, 0);
     }
 
-    // display histogram
-    //namedWindow(name);
     imshow(name, histImage);
 }
 
@@ -133,7 +131,6 @@ Mat histogram_equalisation(Mat image) {
     imhist_c(histeq, h_eq);
     histDisplay_c(h_eq, "Equalised Histogram");
     imshow("Equalized_Image", histeq);
-    //moveWindow("Equalized_Image", 40, 30);
     return histeq;
 }
 
@@ -206,6 +203,5 @@ Mat histogram_matching(Mat src, Mat trg) {
     imhist_c(Matched_Image, matched_hist);
     histDisplay_c(matched_hist, "Matched Histogram");
     imshow("Matched_Image", Matched_Image);
-    //moveWindow("Matched_Image", 40, 30);
     return Matched_Image;
 }
