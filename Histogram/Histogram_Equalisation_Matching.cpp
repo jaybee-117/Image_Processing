@@ -26,6 +26,7 @@ int main()
         cin >> t;
         Mat image = imread(h_e + t, 1);
         Mat Eq_Image = histogram_equalisation(image);
+        imwrite(h_e +"Equalised_Output/"+ t + "_Equalised.jpg",Eq_Image);
     }
 
     if (option == 2){
@@ -35,9 +36,9 @@ int main()
         cin >> target;
         Mat src = imread(h_m + "Source_Image/"+ source, 1);
         Mat trg = imread(h_m + "Target_Image/" + target, 1);
-        histogram_matching(src, trg);
+        Mat Mat_Image = histogram_matching(src, trg);
+        imwrite(h_m +"Matched_Output/" + source + "_Matched.jpg",Mat_Image);
     }
-
     waitKey(0);
 	return 0;
 }
