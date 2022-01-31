@@ -1,0 +1,3 @@
+/mnt/d/Career/Image_Processing/Histogram/CMakeFiles/rebuild_cache.dir
+/mnt/d/Career/Image_Processing/Histogram/CMakeFiles/edit_cache.dir
+/mnt/d/Career/Image_Processing/Histogram/CMakeFiles/Histogram.dir

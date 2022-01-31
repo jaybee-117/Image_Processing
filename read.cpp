@@ -8,6 +8,8 @@ using namespace std;
 
 uint8_t* read (char* Path, int &FileSize,int &DataOffset, int &Width, int &Height, int &BitWidth);
 void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
+void Flip(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
+void rotate90(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
 
 int main(){
     char path[] = "./lena_colored_256.bmp";
@@ -15,7 +17,143 @@ int main(){
     int FileSize, DataOffset,Width,Height,BitWidth;
     pixeldata = read(path,FileSize, DataOffset,Width,Height,BitWidth);
     RGBtoGray(path, pixeldata, Width, Height, BitWidth);
+    Flip(path, pixeldata, Width, Height, BitWidth);
+    rotate90(path, pixeldata, Width, Height, BitWidth);
     return 0;
+}
+
+void Flip(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
+    int i,j;
+
+    uint8_t ImageData[Height][Width][BitWidth/8];
+    int jj=0;
+    for (i=0;i<Height;i++){
+	    for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
+            for(int k=0;k<BitWidth/8;k++){
+               ImageData[i][jj][k] = Image[((Width*BitWidth/8)*i)+j+k];
+            }
+                ++jj;
+	    }
+        jj=0;
+    }
+
+    uint8_t flip[Width][Height][BitWidth/8];
+   
+    for (i=0;i<Height;i++){
+	    for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
+            for(int k=0;k<BitWidth/8;k++)
+               flip[jj][i][k] = ImageData[i][jj][k];
+             ++jj;
+	    }
+        
+        jj=0;
+    }
+    
+    FILE* image;
+    image=fopen(Path,"r");                            
+
+    char fileheader[FileHeaderSize];
+    char informationheader[InformationHeaderSize];
+    fread(fileheader,1,FileHeaderSize,image);
+    fread(informationheader,1,InformationHeaderSize,image);
+
+    uint8_t photo[Height*Width*BitWidth/8];
+
+  
+    for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
+	      for( i=0;i<Height;i++){
+              for(int k=0;k<BitWidth/8;k++)
+                photo[((Width*BitWidth/8)*i)+j+k]=flip[i][jj][k];
+	    }       
+        ++jj;
+          
+    }
+    //photo=Image;
+   // fread(photo, 1,Height*Width*BitWidth/8,image);
+
+    ofstream grayscale_image;
+    grayscale_image.open("flippityflop.bmp");
+    for(i=0;i<FileHeaderSize;i++){
+        grayscale_image << fileheader[i];
+    }
+    for(i=0;i<InformationHeaderSize;i++){
+        grayscale_image << informationheader[i];
+    }
+
+    for (i=0;i<Height*Width*BitWidth/8;i++){
+	   	grayscale_image << photo[i];
+    }
+}
+
+void rotate90(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
+    int i,j;
+
+    uint8_t ImageData[Height][Width][BitWidth/8];
+    int jj=0;
+    for (i=0;i<Height;i++){
+	    for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
+            for(int k=0;k<BitWidth/8;k++){
+               ImageData[i][jj][k] = Image[((Width*BitWidth/8)*i)+j+k];
+            }
+                ++jj;
+	    }
+        jj=0;
+    }
+
+    uint8_t flip[Width][Height][BitWidth/8];
+   
+    for (i=0;i<Height;i++){
+	    for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
+            for(int k=0;k<BitWidth/8;k++)
+               flip[jj][i][k] = ImageData[i][jj][k];
+             ++jj;
+	    }        
+        jj=0;
+    }
+    
+    for (j=0;j<Width*BitWidth/8;j-=BitWidth/8){
+	    for (i=0;i<Height;i++){
+            for(int k=0;k<BitWidth/8;k++)
+               flip[jj][i][k] = ImageData[i][jj][k];
+            ++jj;             
+	    }        
+        jj=0;
+    }
+    
+    FILE* image;
+    image=fopen(Path,"r");                            
+
+    char fileheader[FileHeaderSize];
+    char informationheader[InformationHeaderSize];
+    fread(fileheader,1,FileHeaderSize,image);
+    fread(informationheader,1,InformationHeaderSize,image);
+
+    uint8_t photo[Height*Width*BitWidth/8];
+
+  
+    for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
+	      for( i=0;i<Height;i++){
+              for(int k=0;k<BitWidth/8;k++)
+                photo[((Width*BitWidth/8)*i)+j+k]=flip[i][jj][k];
+	    }       
+        ++jj;
+          
+    }
+    //photo=Image;
+   // fread(photo, 1,Height*Width*BitWidth/8,image);
+
+    ofstream rotate90_image;
+    rotate90_image.open("rotate90.bmp");
+    for(i=0;i<FileHeaderSize;i++){
+        rotate90_image << fileheader[i];
+    }
+    for(i=0;i<InformationHeaderSize;i++){
+        rotate90_image << informationheader[i];
+    }
+
+    for (i=0;i<Height*Width*BitWidth/8;i++){
+	   	rotate90_image << photo[i];
+    }
 }
 
 uint8_t* read (char* Path, int &FileSize,int &DataOffset, int &Width, int &Height, int &BitWidth){
@@ -46,7 +184,7 @@ uint8_t* read (char* Path, int &FileSize,int &DataOffset, int &Width, int &Heigh
     cout << "Data Offset = " <<DataOffset<<" bytes"<<endl;
     cout << "Height = " <<Height<<" pixels"<<endl;
     cout << "Width = " <<Width<<" pixels"<<endl;
-    cout << "BitWidth = " <<BitWidth<<" bits = "<<BitWidth/8<<" bytes"<< endl;
+    cout << "BitWidth = " <<BitWidth<<" bits = "<<BitWidth/8<<" byte(s)"<< endl;
     int totalSize  = Height*Width*BitWidth/8;
 
     uint8_t *PixelData;
@@ -96,7 +234,7 @@ void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
 
     uint8_t photo[Height*Width*BitWidth/8];
 
-    fread(photo, 1,Height*Width*BitWidth/8,image);
+    //fread(photo, 1,Height*Width*BitWidth/8,image);
 
     ofstream grayscale_image;
     grayscale_image.open("grayscale.bmp");
