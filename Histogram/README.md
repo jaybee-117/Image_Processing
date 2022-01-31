@@ -11,7 +11,7 @@ cmake .
 make
 ```
 The `CMakeLists.txt` has been pre-configured by me, so you do not have to rewrite it.
-If OpenCV has been made into another folder find the `/lib/cmake/opencv4` subfolder of the installation directory <br>and place it in `SET(OpenCV_DIR <../lib/cmake/opencv4>)` of `CMakeLists.txt`<br>
+If OpenCV has been made into another folder find the `/lib/cmake/opencv4` subfolder of the installation directory and place it in `SET(OpenCV_DIR <../lib/cmake/opencv4>)` of `CMakeLists.txt`<br>
 Run the executeable using:
 `./Histogram_Equalisation_Matching`
 
