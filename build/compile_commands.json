@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/mnt/d/Career/Image_Processing/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem /home/jaybee/opencv/include/opencv4  -g   -o CMakeFiles/Histogram_Equalisation_Matching.dir/Histogram_Equalisation_Matching.cpp.o -c /mnt/d/Career/Image_Processing/Histogram/Histogram_Equalisation_Matching.cpp",
+  "file": "/mnt/d/Career/Image_Processing/Histogram/Histogram_Equalisation_Matching.cpp"
+}
+]

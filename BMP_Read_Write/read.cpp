@@ -10,6 +10,7 @@ uint8_t* read (char* Path, int &FileSize,int &DataOffset, int &Width, int &Heigh
 void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
 void Flip(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
 void rotate90(char* Path, uint8_t* Image, int Width, int Height, int BitWidth);
+void write(char* Path, uint8_t* Image, string FileName);
 
 int main(){
     char path[] = "./lena_colored_256.bmp";
@@ -21,7 +22,7 @@ int main(){
     rotate90(path, pixeldata, Width, Height, BitWidth);
     return 0;
 }
-
+    
 void Flip(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
     int i,j;
 
@@ -68,20 +69,18 @@ void Flip(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
         ++jj;
           
     }
-    //photo=Image;
-   // fread(photo, 1,Height*Width*BitWidth/8,image);
 
-    ofstream grayscale_image;
-    grayscale_image.open("flippityflop.bmp");
+    ofstream flip_image;
+    flip_image.open("flippityflop.bmp");
     for(i=0;i<FileHeaderSize;i++){
-        grayscale_image << fileheader[i];
+        flip_image << fileheader[i];
     }
     for(i=0;i<InformationHeaderSize;i++){
-        grayscale_image << informationheader[i];
+        flip_image << informationheader[i];
     }
 
     for (i=0;i<Height*Width*BitWidth/8;i++){
-	   	grayscale_image << photo[i];
+	   	flip_image << photo[i];
     }
 }
 
@@ -111,15 +110,6 @@ void rotate90(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
         jj=0;
     }
     
-    for (j=0;j<Width*BitWidth/8;j-=BitWidth/8){
-	    for (i=0;i<Height;i++){
-            for(int k=0;k<BitWidth/8;k++)
-               flip[jj][i][k] = ImageData[i][jj][k];
-            ++jj;             
-	    }        
-        jj=0;
-    }
-    
     FILE* image;
     image=fopen(Path,"r");                            
 
@@ -134,13 +124,11 @@ void rotate90(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
     for (j=0;j<Width*BitWidth/8;j+=BitWidth/8){
 	      for( i=0;i<Height;i++){
               for(int k=0;k<BitWidth/8;k++)
-                photo[((Width*BitWidth/8)*i)+j+k]=flip[i][jj][k];
+                photo[((Width*BitWidth/8)*i)+j+k]=flip[Height-i][jj][k];
 	    }       
         ++jj;
           
     }
-    //photo=Image;
-   // fread(photo, 1,Height*Width*BitWidth/8,image);
 
     ofstream rotate90_image;
     rotate90_image.open("rotate90.bmp");
@@ -224,6 +212,12 @@ void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
         grayscale[i+2] = grayscale[i];
         
     }
+    write(Path, grayscale, "grayscale.bmp");
+}
+
+//write doesnt work if the image dimentions have changed
+void write(char* Path, uint8_t* Image, string FileName){
+    int Width, Height, BitWidth;
     FILE* image;
     image=fopen(Path,"r");                            
 
@@ -232,20 +226,20 @@ void RGBtoGray(char* Path, uint8_t* Image, int Width, int Height, int BitWidth){
     fread(fileheader,1,FileHeaderSize,image);
     fread(informationheader,1,InformationHeaderSize,image);
 
-    uint8_t photo[Height*Width*BitWidth/8];
+    Width = ((int)informationheader[4]) + (((int)informationheader[5]) << 8) + (((int)informationheader[6]) << 16) + (((int)informationheader[7]) << 24);
+    Height = ((int)informationheader[8]) + (((int)informationheader[9]) << 8) + (((int)informationheader[10]) << 16) + (((int)informationheader[11]) << 24);
+    BitWidth = ((int)informationheader[14]) + ((int)informationheader[15] << 8);
 
-    //fread(photo, 1,Height*Width*BitWidth/8,image);
-
-    ofstream grayscale_image;
-    grayscale_image.open("grayscale.bmp");
-    for(i=0;i<FileHeaderSize;i++){
-        grayscale_image << fileheader[i];
+    ofstream output_image;
+    output_image.open(FileName);
+    for(int i=0;i<FileHeaderSize;i++){
+        output_image << fileheader[i];
     }
-    for(i=0;i<InformationHeaderSize;i++){
-        grayscale_image << informationheader[i];
+    for(int i=0;i<InformationHeaderSize;i++){
+        output_image << informationheader[i];
     }
 
-    for (i=0;i<Height*Width*BitWidth/8;i++){
-	   	grayscale_image << grayscale[i];
+    for (int i=0;i<Height*Width*BitWidth/8;i++){
+	   	output_image << Image[i];
     }
 }

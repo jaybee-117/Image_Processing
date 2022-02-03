@@ -33,5 +33,7 @@
     "iosfwd": "cpp",
     "iostream": "cpp",
     "fstream": "cpp"
-  }
+  },
+  "cmake.configureOnOpen": true,
+  "cmake.sourceDirectory": "${workspaceFolder}/Histogram"
 }
