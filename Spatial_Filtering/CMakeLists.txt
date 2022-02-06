@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( Spatial_Filtering )
+SET(OpenCV_DIR ~/opencv/lib/cmake/opencv4)
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( Spatial_Filtering Spatial_Filtering.cpp )
+target_link_libraries( Spatial_Filtering ${OpenCV_LIBS} )
