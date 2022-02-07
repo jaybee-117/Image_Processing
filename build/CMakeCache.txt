@@ -220,6 +220,9 @@ Histogram_Equalisation_Matching_SOURCE_DIR:STATIC=/mnt/d/Career/Image_Processing
 //Value Computed by CMake
 Histogram_SOURCE_DIR:STATIC=/mnt/d/Career/Image_Processing/Histogram
 
+//The directory containing a CMake configuration file for OpenCV.
+OpenCV_DIR:PATH=OpenCV_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries

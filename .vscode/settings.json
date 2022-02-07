@@ -32,7 +32,8 @@
   "files.associations": {
     "iosfwd": "cpp",
     "iostream": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "ostream": "cpp"
   },
   "cmake.configureOnOpen": true,
   "cmake.sourceDirectory": "${workspaceFolder}/Histogram"
