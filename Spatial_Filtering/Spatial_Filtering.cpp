@@ -6,14 +6,14 @@ using namespace cv;
 using namespace std;
 
 //--------Start of Global Variables----------//
-const int num_images = 13;
+const int num_images = 21;
 const int num_kernels = 4;
-const int num_filters = 8;
+const int num_filters = 9;
 const int image_slider_max = num_images - 1;
 const int size_slider_max = num_kernels-1;
 const int filter_slider_max = num_filters-1;
 const int photo_slider_max = num_images - 1;
-const int sigma_slider_max = 250;
+const int sigma_slider_max = 100;
 int image_slider;
 int size_slider;
 int filter_slider;
@@ -44,7 +44,8 @@ vector<string> images ={"Noisy_Images/Cameraman_Salt&Pepper_0.02.jpg",
                         "Normal_Images/livingroom.jpg",
                         "Normal_Images/mandril_gray.jpg",
                         "Normal_Images/pirate.jpg",
-                        "Normal_Images/walkbridge.jpg"};
+                        "Normal_Images/walkbridge.jpg",
+                        "lena_gray_dark.jpg_Equalised.jpg"};
 
 vector<int> kernelSize = {3,5,7,9};
 
@@ -189,15 +190,15 @@ vector<vector<vector<float> > > sobel_D = {
 
 {       { 0,  1, 2},
         { -1, 0, 1},
-        { -2,-1, 0} },
-
-{       {1/16.0, 2/16.0, 1/16.0},
-        {2/16.0, 4/16.0, 2/16.0},
-        {1/16.0, 2/16.0, 1/16.0}}
+        { -2,-1, 0} }
 };
 
 vector<vector<vector<float> > > gaussian = {
 {       {1}},
+
+{       {1/16.0, 2/16.0, 1/16.0},
+        {2/16.0, 4/16.0, 2/16.0},
+        {1/16.0, 2/16.0, 1/16.0}},
 
 {       {1/273.0, 4/273.0, 7/273.0, 4/273.0, 1/273.0},
         {4/273.0, 16/273.0, 26/273.0, 16/273.0, 4/273.0},
