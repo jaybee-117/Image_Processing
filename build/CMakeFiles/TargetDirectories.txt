@@ -1,3 +1,0 @@
-/mnt/d/Career/Image_Processing/build/CMakeFiles/edit_cache.dir
-/mnt/d/Career/Image_Processing/build/CMakeFiles/rebuild_cache.dir
-/mnt/d/Career/Image_Processing/build/CMakeFiles/Histogram_Equalisation_Matching.dir
