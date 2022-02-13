@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( Frequency_Filtering )
+SET(OpenCV_DIR /opt/homebrew/Cellar/opencv/4.5.4_4/lib/cmake/opencv4)
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( Frequency_Filtering Frequency_Filtering.cpp )
+target_link_libraries( Frequency_Filtering ${OpenCV_LIBS} )
