@@ -1,5 +1,5 @@
-# Histogram Matching & Equalisation
-The program `Histogram_Equalisation_Matching.cpp` will equalise/match images depending on the user's input.
+# Frequency Filtering
+The program `Frequency_Filtering.cpp` will equalise/match images depending on the user's input.
 
 ## Making the file using CMake (For MacOS)
 Download the repository and clone it onto the device into a preferred directory using:<br>
