@@ -1,5 +1,5 @@
 # Frequency Filtering
-The program `Frequency_Filtering.cpp` will equalise/match images depending on the user's input.
+The program `Frequency_Filtering.cpp` will equalise/match images depending on the user's input.<br>
 Reference: [Paul Bourke's FFT Implemetation](http://paulbourke.net/miscellaneous/dft/)
 
 ## Making the file using CMake (For MacOS)
