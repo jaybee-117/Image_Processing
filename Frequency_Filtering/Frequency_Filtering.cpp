@@ -289,7 +289,7 @@ COMPLEX** butterworth_lpf(COMPLEX **c, int rows, int columns, double cutoff){
     for(int i = 0; i < rows; i++){
         for (int j = 0; j < columns; j++)
         {
-            omega = sqrt(i*i + j*j);
+            omega = sqrt((i-rows/2)*(i-rows/2) + (j-columns/2)*(j-columns/2));
             filtered[i][j].real = (cutoff*cutoff*c[i][j].real+omega*cutoff*c[i][j].imag)/(cutoff*cutoff+omega*omega);
             filtered[i][j].imag = (cutoff*cutoff*c[i][j].imag-omega*cutoff*c[i][j].real)/(cutoff*cutoff+omega*omega);
         }
@@ -306,12 +306,52 @@ COMPLEX** butterworth_hpf(COMPLEX **c, int rows, int columns,double cutoff){
     for(int i = 0; i < rows; i++){
         for (int j = 0; j < columns; j++)
         {
-            omega = sqrt(i*i + j*j);
-            filtered[i][j].real = (cutoff*cutoff*c[i][j].real + omega*cutoff*c[i][j].imag - omega*omega*c[i][j].imag)/(cutoff*cutoff + 2*omega*omega + 2*omega*cutoff);
-            filtered[i][j].imag = (cutoff*cutoff*c[i][j].imag - omega*cutoff*c[i][j].real - omega*omega*c[i][j].real)/(cutoff*cutoff + 2*omega*omega + 2*omega*cutoff);
+            omega = sqrt((i-rows/2)*(i-rows/2) + (j-columns/2)*(j-columns/2));
+            filtered[i][j].imag = (cutoff*omega*c[i][j].real + omega*omega*c[i][j].imag)/(cutoff*cutoff+omega*omega);
+            filtered[i][j].real = (omega*omega*c[i][j].real - cutoff*omega*c[i][j].imag)/(cutoff*cutoff+omega*omega);
         }
     }
     return filtered;
+}
+
+COMPLEX** question1(COMPLEX **c, int rows, int columns){
+    COMPLEX** img1 = (COMPLEX**)malloc(rows * sizeof(COMPLEX));
+    for(int i=0;i<rows;i++){
+        img1[i] = (COMPLEX*)malloc(columns * sizeof(COMPLEX));
+    }
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns;j++){
+            img1[i][j].real = pow(-1,i+j)*c[i][j].real;
+            img1[i][j].imag = pow(-1,i+j)*c[i][j].imag;
+        }
+    }
+
+    FFT2D(img1, rows, columns, 1);
+
+    COMPLEX**temp = reorganise_quadrant(img1, rows,columns);
+
+    COMPLEX** img2 = (COMPLEX**)malloc(rows * sizeof(COMPLEX));
+    for(int i=0;i<rows;i++){
+        img2[i] = (COMPLEX*)malloc(columns * sizeof(COMPLEX));
+    }
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns;j++){
+            img2[i][j].real = temp[i][j].real;
+            img2[i][j].imag = -temp[i][j].imag;
+        }
+    }
+
+    img1 = reorganise_quadrant(img2, rows,columns);
+
+    FFT2D(img1, rows, columns, -1);
+
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns;j++){
+            img1[i][j].real = pow(-1,i+j)*img1[i][j].real;
+            img1[i][j].imag = pow(-1,i+j)*img1[i][j].imag;
+        }
+    }
+    return img1;
 }
 
 int main(){
@@ -337,6 +377,17 @@ int main(){
         }
     }
     // Saving the image into a complex image (END)
+
+    //Question1 (START)
+    COMPLEX** question_1 = question1(complex_img, rows, columns);
+    Mat question1_image(rows,columns,CV_8UC1,Scalar(0));
+    for(i=0;i<rows;i++){
+        for(j=0;j<columns;j++){
+            question1_image.at<uchar>(i,j) = question_1[i][j].real;
+        }
+    }
+    imshow("Question 1",question1_image);
+    //QUestion1 (END)
 
     FFT2D(complex_img,rows,columns,1); 
     displayFFT(complex_img,rows,columns,"Raw FFT");
