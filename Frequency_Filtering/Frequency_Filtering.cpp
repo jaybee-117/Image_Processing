@@ -315,7 +315,10 @@ COMPLEX** butterworth_hpf(COMPLEX **c, int rows, int columns,double cutoff){
 }
 
 int main(){
-    Mat img = imread("Input_Images/Square.png",0);
+    string src;
+    cout << "Enter the image name with the extention: ";
+    cin >> src;
+    Mat img = imread("Input_Images/"+src,0);
     imshow("Sample Image",img);
     int columns = img.cols;
     int rows = img.rows;
