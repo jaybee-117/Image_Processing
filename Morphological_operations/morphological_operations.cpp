@@ -16,6 +16,36 @@ vector<vector <bool> > structure3 = {   {1,1,1},
                                         {1,1,1},
                                         {1,1,1}};
 
+vector<vector <bool> > structure4 = {   {0,0,1,0,0},
+                                        {0,1,1,1,0},
+                                        {1,1,1,1,1},
+                                        {0,1,1,1,0},
+                                        {0,0,1,0,0}};      
+
+vector<vector <bool> > structure5 = {   {1,1,1,1,1},
+                                        {1,1,1,1,1},
+                                        {1,1,1,1,1},
+                                        {1,1,1,1,1},
+                                        {1,1,1,1,1}};   
+
+vector<vector <bool> > structure6 = {   {1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1}};
+
+vector<vector <bool> > structure7 = {   {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1}};                               
+
 void printbin(Mat, string);
 Mat erode(Mat, vector<vector<bool> >);
 Mat dilate(Mat, vector<vector<bool> >);
@@ -27,19 +57,51 @@ int main(){
     imshow("Original Image",og_img);
     printbin(og_img,"original.bin");
 
-    Mat eroded_img = erode(og_img, structure2);
+    int structure_no;
+    cout << "Enter the structure number(1-7): ";
+    cin >> structure_no;
+    vector<vector <bool> > structure;
+
+    switch(structure_no){
+        case 1:
+            structure = structure1;
+            break;
+        case 2:
+            structure = structure2;
+            break;
+        case 3:
+            structure = structure3;
+            break;
+        case 4:
+            structure = structure4;
+            break;
+        case 5:
+            structure = structure5;
+            break;   
+        case 6:
+            structure = structure6;
+            break;  
+        case 7:
+            structure = structure7;
+            break; 
+        default:
+            cout << "Invalid response";
+            return 0;
+    }
+
+    Mat eroded_img = erode(og_img, structure);
     printbin(eroded_img,"eroded.bin");
     imshow("Eroded Image", eroded_img);
 
-    Mat dilated_img = dilate(og_img, structure2);
+    Mat dilated_img = dilate(og_img, structure);
     printbin(dilated_img,"dilated.bin");
     imshow("Dilated Image", dilated_img);
 
-    Mat opened_img = open_bin(og_img, structure2);
+    Mat opened_img = open_bin(og_img, structure);
     printbin(opened_img,"opened.bin");
     imshow("Opened Image", opened_img);
 
-    Mat closed_img = close_bin(og_img, structure2);
+    Mat closed_img = close_bin(og_img, structure);
     printbin(closed_img,"closed.bin");
     imshow("Closed Image", closed_img);
 
@@ -67,11 +129,12 @@ Mat erode(Mat img, vector<vector<bool> > structure){
         }
     }
 
-    for (int i = 1; i< img.rows - 1; i++){
-        for(int j = 1; j< img.cols - 1; j++){
+    int size = structure.size();
+    for (int i = (size-1)/2; i< img.rows - 1; i++){
+        for(int j = (size-1)/2; j< img.cols - 1; j++){
             
-            for(int k = 0; k< 3 ;k++){
-                for(int l = 0; l<3 ; l++){
+            for(int k = 0; k< size ;k++){
+                for(int l = 0; l<size ; l++){
                     if (structure[k][l]){
                         if (!image[i+k][j+l]){
                             eroded_image.at<uchar>(i,j) = 0;
@@ -97,11 +160,12 @@ Mat dilate(Mat img, vector<vector<bool> > structure){
         }
     }
 
-    for (int i = 1; i< img.rows - 1; i++){
-        for(int j = 1; j< img.cols - 1; j++){
+    int size = structure.size();
+    for (int i = (size-1)/2; i< img.rows - 1; i++){
+        for(int j = (size-1)/2; j< img.cols - 1; j++){
             if(image[i][j]){
-                for(int k = 0; k< 3 ;k++){
-                    for(int l = 0; l<3 ; l++){
+                for(int k = 0; k< size ;k++){
+                    for(int l = 0; l<size ; l++){
                         if (structure[k][l]){
                             dilated_image.at<uchar>(i+k,j+l) = 255;
                         }
