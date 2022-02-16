@@ -1,0 +1,3 @@
+/Users/jaybee/Documents/Image_Processing/Morphological_operations/CMakeFiles/Morphological_operations.dir
+/Users/jaybee/Documents/Image_Processing/Morphological_operations/CMakeFiles/edit_cache.dir
+/Users/jaybee/Documents/Image_Processing/Morphological_operations/CMakeFiles/rebuild_cache.dir
