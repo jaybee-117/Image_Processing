@@ -44,7 +44,23 @@ vector<vector <bool> > structure7 = {   {1,1,1,1,1,1,1,1,1},
                                         {1,1,1,1,1,1,1,1,1},
                                         {1,1,1,1,1,1,1,1,1},
                                         {1,1,1,1,1,1,1,1,1},
-                                        {1,1,1,1,1,1,1,1,1}};                               
+                                        {1,1,1,1,1,1,1,1,1}};                              
+
+vector<vector <bool> > structure8 = {   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}}; 
 
 void printbin(Mat, string);
 Mat erode(Mat, vector<vector<bool> >);
@@ -58,7 +74,7 @@ int main(){
     printbin(og_img,"original.bin");
 
     int structure_no;
-    cout << "Enter the structure number(1-7): ";
+    cout << "Enter the structure number(1-8): ";
     cin >> structure_no;
     vector<vector <bool> > structure;
 
@@ -83,6 +99,9 @@ int main(){
             break;  
         case 7:
             structure = structure7;
+            break; 
+        case 8:
+            structure = structure8;
             break; 
         default:
             cout << "Invalid response";
@@ -188,3 +207,4 @@ Mat close_bin(Mat img, vector<vector<bool> > structure){
     Mat dilated_image = erode(temp, structure);
     return dilated_image;
 }
+
