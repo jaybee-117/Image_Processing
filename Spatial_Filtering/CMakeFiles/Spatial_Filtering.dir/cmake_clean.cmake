@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Spatial_Filtering.dir/Spatial_Filtering.cpp.o"
+  "CMakeFiles/Spatial_Filtering.dir/Spatial_Filtering.cpp.o.d"
   "Spatial_Filtering"
   "Spatial_Filtering.pdb"
 )

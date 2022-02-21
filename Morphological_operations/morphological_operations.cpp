@@ -204,7 +204,7 @@ Mat open_bin(Mat img, vector<vector<bool> > structure){
 
 Mat close_bin(Mat img, vector<vector<bool> > structure){
     Mat temp = dilate(img, structure);
-    Mat dilated_image = erode(temp, structure);
-    return dilated_image;
+    Mat closed_image = erode(temp, structure);
+    return closed_image;
 }
 
